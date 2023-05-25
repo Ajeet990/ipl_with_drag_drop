@@ -1,16 +1,18 @@
 <table class="table">
 <thead>
     <tr>
-    <th scope="col">#</th>
-    <th scope="col">Full Name</th>
+        <th scope="col">#</th>
+        <th scope="col">Full Name</th>
+        <th scope="col">Score</th>
     </tr>
 </thead>
 <tbody>
 {% for player in playingXi %}
     
     <tr id={{player.id}}>
-    <th scope="row">#</th>
-    <td>{{player.name}}</td>
+        <th scope="row">#</th>
+        <td>{{player.name}}</td>
+        <td><input type="number" value="{{player.score}}"/></td>
     </tr>
     
 {% endfor %}

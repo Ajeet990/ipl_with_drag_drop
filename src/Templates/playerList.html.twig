@@ -32,20 +32,20 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action = "index.php" method="post">
+          <form action = "index.php" method="post" id="addNewPlayerForm">
             <div class="mb-3">
               <label for="playerName" class="form-label">Player Name</label>
-              <input type="text" name="playerName" class="form-control" id="playerName" aria-describedby="playerName">
+              <input type="text" name="playerName" class="form-control" id="playerName" aria-describedby="playerName" required>
             </div>
             <div class="mb-3">
               <label for="jerseyno" class="form-label">Jersey.no</label>
-              <input type="number" name="jerseyNo" class="form-control" id="jerseyno" aria-describedby="jerseyno">
+              <input type="number" name="jerseyNo" class="form-control" id="jerseyno" aria-describedby="jerseyno" required>
             </div>
             <div class="mb-3">
               <label for="ptype" class="form-label">Player type</label>
-              <input type="text" name="playerType" class="form-control" id="ptype" aria-describedby="ptype">
+              <input type="text" name="playerType" class="form-control" id="ptype" aria-describedby="ptype" required>
             </div>
-            <button type="submit" name="addNewPlayer" class="btn btn-primary">Add Player</button>
+            <button  name="addNewPlayer"  class="btn btn-primary">Add Player</button>
           </form>
         </div>
         <div class="modal-footer">
@@ -88,6 +88,7 @@
               <tr>
               <th scope="col">#</th>
               <th scope="col">Full Name</th>
+              <th scope="col">Score</th>
               </tr>
           </thead>
         <tbody>
@@ -95,6 +96,7 @@
             <tr id={{player.id}}>
             <th scope="row">#</th>
             <td>{{player.name}}</td>
+            <td><input type="number" value="{{player.score}}"/></td>
             </tr>
         {% endfor %}
         </tbody>
@@ -112,5 +114,6 @@
     <script src="bootstrap/js/bootstrap.js"></script>
     <script src="src/js/jquery-3.7.js"></script>
     <script src="src/js/players.js"></script>
+    {# <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script> #}
   </body>
 </html>

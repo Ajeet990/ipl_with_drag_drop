@@ -17,6 +17,7 @@ $(document).ready(function() {
 		$(this).css('background', '#FFFFFF');
 		var player_code = e.originalEvent.dataTransfer.getData('player_id');
 		cartAction('add',player_code);
+        $("#"+player_code).remove();
 	});
 
     function cartAction(action,player_code) {
