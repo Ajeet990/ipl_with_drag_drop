@@ -1,0 +1,11 @@
+{
+    "name": "task/ipl",
+    "autoload": {
+        "psr-4": {
+            "Task\\Ipl\\": "src/"
+        }
+    },
+    "require": {
+        "twig/twig": "3.0"
+    }
+}

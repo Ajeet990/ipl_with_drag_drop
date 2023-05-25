@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <title>IPL management system</title>
+  </head>
+  <body class="bg-danger">
+    <div class="py-1 bg-primary">
+      <img class="mx-2" src="img/rcb.png">RCB PRIDICT PLAYING XI
+    </div>
+<div class="container">
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary my-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Add new player
+  </button>
+  <button type="button" class="btn btn-primary my-1">
+    Predict
+  </button>
+  <button type="button" class="btn btn-primary my-1">
+    View
+  </button>
+
+      <!-- Modal to add new player -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Add Player To Squad</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action = "index.php" method="post">
+            <div class="mb-3">
+              <label for="playerName" class="form-label">Player Name</label>
+              <input type="text" name="playerName" class="form-control" id="playerName" aria-describedby="playerName">
+            </div>
+            <div class="mb-3">
+              <label for="jerseyno" class="form-label">Jersey.no</label>
+              <input type="number" name="jerseyNo" class="form-control" id="jerseyno" aria-describedby="jerseyno">
+            </div>
+            <div class="mb-3">
+              <label for="ptype" class="form-label">Player type</label>
+              <input type="text" name="playerType" class="form-control" id="ptype" aria-describedby="ptype">
+            </div>
+            <button type="submit" name="addNewPlayer" class="btn btn-primary">Add Player</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-4">
+      <h3>Our Squad</h3>
+      <div class="squadList">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Full Name</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for player in squadPlayers %}
+            
+            <tr id={{player.id}} class="draggable" draggable="true">
+              <th scope="row">#</th>
+              <td>{{player.name}}</td>
+            </tr>
+            
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-8">
+      <h3>Predicted Your Playing XI</h3>
+      <div id="playingXI">
+      {% if playingXI|length > 0 %}
+        <table class="table">
+          <thead>
+              <tr>
+              <th scope="col">#</th>
+              <th scope="col">Full Name</th>
+              </tr>
+          </thead>
+        <tbody>
+        {% for player in playingXI %}
+            <tr id={{player.id}}>
+            <th scope="row">#</th>
+            <td>{{player.name}}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+        {% else %}
+          <h4>No player in Playing XI till now</h4>
+          <h4>Drop here to add some players</h4>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <script src="bootstrap/js/bootstrap.js"></script>
+    <script src="src/js/jquery-3.7.js"></script>
+    <script src="src/js/players.js"></script>
+  </body>
+</html>
