@@ -50,4 +50,13 @@ class PlayerController
             return "Something went wrong or player already added in playing XI list.";
         }
     }
+
+    public function removePlayerFromPlayingXi(int $playerId)
+    {
+        $removeRst = $this->pModelObj->removePlayerFromPlayingXi($playerId);
+        if ($removeRst) {
+            $allPlayingXIPlayers = $this->pModelObj->getPlayingXIplayers();
+            return $this->_twig->render('playingXIList.html.twig', ['playingXi' => $allPlayingXIPlayers]);
+        }
+    }
 }

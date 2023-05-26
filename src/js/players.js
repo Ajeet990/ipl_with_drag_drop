@@ -20,6 +20,23 @@ $(document).ready(function() {
         $("#"+player_code).remove();
 	});
 
+    $(".removePlayer").on('click', function(e){
+        var result = confirm("Are you sure want to remove this player from playing XI?");
+        if (result) {
+            var playerId = $(this).attr('id');
+            jQuery.ajax({
+                url: "src/public/playerAction.php",
+                data:{removePlayerFromPlayingXi:1, playerId:playerId},
+                type: "POST",
+                success:function(data){
+                    $("#playingXI").html(data);
+                },
+                error:function (){}
+            });
+            location.reload();
+        }
+    })
+
     function cartAction(action,player_code) {
         var queryString = "";
         if(action != "") {

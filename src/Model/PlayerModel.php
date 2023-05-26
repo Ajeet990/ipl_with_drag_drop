@@ -3,8 +3,10 @@ namespace Task\Ipl\Model;
 
 class PlayerModel
 {
-    public const SELECTED_IN_PLAYING_XI = 1;
-    public const NOT_SELECTED_IN_PLAYING_XI = 0;
+    public const SELECTED_IN_PLAYING_XI = '1';
+    public const NOT_SELECTED_IN_PLAYING_XI = '0';
+    public const PLAYER_DELETED = '1';
+    public const PLAYER_NOT_DELETED = '0';
 
     private $conn;
     public function __construct($conn)
@@ -22,8 +24,9 @@ class PlayerModel
     public function getSquadPlayers()
     {
         $status = PlayerModel::NOT_SELECTED_IN_PLAYING_XI;
-        $allPlayersStmt = $this->conn->prepare("SELECT * from players where isPlayingXi = ?");
-        $allPlayersStmt->bind_param("i", $status);
+        $deleteStatus = PlayerModel::PLAYER_NOT_DELETED;
+        $allPlayersStmt = $this->conn->prepare("SELECT * from players where isPlayingXi = ? and isDeleted = ?");
+        $allPlayersStmt->bind_param("ss", $status, $deleteStatus);
         $allPlayersStmt->execute();
         $allPlayers = $allPlayersStmt->get_result()->fetch_all(MYSQLI_ASSOC);
         return $allPlayers;
@@ -31,8 +34,10 @@ class PlayerModel
 
     public function addPlayer(string $playerName, int $jerseyNo, string $playerType) : bool
     {
-        $addNewPlayerStmt = $this->conn->prepare("INSERT INTO players(name, type, jersey_no) values (? ,?, ?)");
-        $addNewPlayerStmt->bind_param("ssi", $playerName, $playerType, $jerseyNo);
+        $status = PlayerModel::NOT_SELECTED_IN_PLAYING_XI;
+        $deleteStatus = PlayerModel::PLAYER_NOT_DELETED;
+        $addNewPlayerStmt = $this->conn->prepare("INSERT INTO players(name, type, jersey_no, isPlayingXi, isDeleted) values (? ,?, ?, ?, ?)");
+        $addNewPlayerStmt->bind_param("ssiss", $playerName, $playerType, $jerseyNo, $status, $deleteStatus);
         $addNewPlayerStmt->execute();
         if ($addNewPlayerStmt->insert_id > 0) {
             return true;
@@ -45,7 +50,7 @@ class PlayerModel
     {
         $selectedStatus = PlayerModel::SELECTED_IN_PLAYING_XI;
         $updatePlayerstmt = $this->conn->prepare("UPDATE players SET isPlayingXI = ? where id = ?");
-        $updatePlayerstmt->bind_param("ii", $selectedStatus, $playerId);
+        $updatePlayerstmt->bind_param("si", $selectedStatus, $playerId);
         $updatePlayerstmt->execute();
         if ($updatePlayerstmt->affected_rows > 0) {
             return true;
@@ -57,10 +62,25 @@ class PlayerModel
     public function getPlayingXIplayers() : array
     {
         $status = PlayerModel::SELECTED_IN_PLAYING_XI;
-        $playingXiPlayers = $this->conn->prepare("SELECT * from players where isPlayingXI = ?");
-        $playingXiPlayers->bind_param("i", $status);
+        $deleteStatus = PlayerModel::PLAYER_NOT_DELETED;
+        $playingXiPlayers = $this->conn->prepare("SELECT * from players where isPlayingXI = ? and isDeleted = ?");
+        $playingXiPlayers->bind_param("ss", $status, $deleteStatus);
         $playingXiPlayers->execute();
         $playerList = $playingXiPlayers->get_result()->fetch_all(MYSQLI_ASSOC);
         return $playerList;
+    }
+
+    public function removePlayerFromPlayingXi(int $playerId) : bool
+    {
+        $selectedStatus = PlayerModel::NOT_SELECTED_IN_PLAYING_XI;
+        $removePlayerStmt = $this->conn->prepare("UPDATE players set isPlayingXi = ? where id = ?");
+        $removePlayerStmt->bind_param("si", $selectedStatus, $playerId);
+        $removePlayerStmt->execute();
+        if ($removePlayerStmt->affected_rows > 0) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
 }
