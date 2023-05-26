@@ -5,6 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="src/css/style.css">
+    {# <link rel="stylesheet" href="src/css/font-awesome.css"/> #}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
   </head>
 
@@ -36,15 +38,15 @@
           <form action = "index.php" method="post" id="addNewPlayerForm">
             <div class="mb-3">
               <label for="playerName" class="form-label">Player Name</label>
-              <input type="text" name="playerName" class="form-control" id="playerName" aria-describedby="playerName" required>
+              <input type="text" name="playerName" class="form-control" id="playerName" aria-describedby="playerName">
             </div>
             <div class="mb-3">
               <label for="jerseyno" class="form-label">Jersey.no</label>
-              <input type="number" name="jerseyNo" class="form-control" id="jerseyno" aria-describedby="jerseyno" required>
+              <input type="number" name="jerseyNo" class="form-control" id="jerseyNo" aria-describedby="jerseyno">
             </div>
             <div class="mb-3">
               <label for="ptype" class="form-label">Player type</label>
-              <input type="text" name="playerType" class="form-control" id="ptype" aria-describedby="ptype" required>
+              <input type="text" name="playerType" class="form-control" id="playerType" aria-describedby="ptype">
             </div>
             <button  name="addNewPlayer"  class="btn btn-primary">Add Player</button>
           </form>
@@ -73,6 +75,11 @@
             <tr id={{player.id}} class="draggable" draggable="true">
               <th scope="row">#</th>
               <td>{{player.name}}</td>
+              <td>
+                <div class="deletePlayer" id={{player.id}} >
+                  <i class="fa-solid fa-user-minus"></i>
+                </td>
+              </div>
             </tr>
             
           {% endfor %}
@@ -120,6 +127,7 @@
     <script src="bootstrap/js/bootstrap.js"></script>
     <script src="src/js/jquery-3.7.js"></script>
     <script src="src/js/players.js"></script>
-    {# <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script> #}
+    <script src="src/js/validation.js"></script>
+    <script src="src/js/validateForm.js"></script>
   </body>
 </html>

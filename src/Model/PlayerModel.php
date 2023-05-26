@@ -83,4 +83,17 @@ class PlayerModel
         }
 
     }
+
+    public function removePlayerFromSquad(int $playerId) : bool
+    {
+        $deleteStatus = PlayerModel::PLAYER_DELETED;
+        $deletePlayerStmt = $this->conn->prepare("UPDATE players set isDeleted = ? where id = ?");
+        $deletePlayerStmt->bind_param("si", $deleteStatus, $playerId);
+        $deletePlayerStmt->execute();
+        if ($deletePlayerStmt->affected_rows > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

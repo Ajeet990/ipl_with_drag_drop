@@ -21,11 +21,11 @@ $(document).ready(function() {
 	});
 
     $(".removePlayer").on('click', function(e){
-        var result = confirm("Are you sure want to remove this player from playing XI?");
+        var result = confirm("Are you sure want to remove this player from playing XI ?");
         if (result) {
             var playerId = $(this).attr('id');
             jQuery.ajax({
-                url: "src/public/playerAction.php",
+                url: "src/public/playerActionAjax.php",
                 data:{removePlayerFromPlayingXi:1, playerId:playerId},
                 type: "POST",
                 success:function(data){
@@ -33,6 +33,24 @@ $(document).ready(function() {
                 },
                 error:function (){}
             });
+            location.reload();
+            location.reload();
+        }
+    })
+    $(".deletePlayer").on('click', function(e){
+        var result = confirm("Are you sure want to remove this player from this Squad ?");
+        if (result) {
+            var playerId = $(this).attr('id');
+            jQuery.ajax({
+                url: "src/public/playerActionAjax.php",
+                data:{removePlayerFromSquad:1, playerId:playerId},
+                type: "POST",
+                success:function(data){
+                    $("#squadList").html(data);
+                },
+                error:function (){}
+            });
+            location.reload();
             location.reload();
         }
     })
@@ -53,7 +71,7 @@ $(document).ready(function() {
             }	 
         }
         jQuery.ajax({
-            url: "src/public/playerAction.php",
+            url: "src/public/playerActionAjax.php",
             data:queryString,
             type: "POST",
             success:function(data){

@@ -59,4 +59,13 @@ class PlayerController
             return $this->_twig->render('playingXIList.html.twig', ['playingXi' => $allPlayingXIPlayers]);
         }
     }
+    public function removePlayerFromSquad(int $playerId)
+    {
+        $removeRst = $this->pModelObj->removePlayerFromSquad($playerId);
+        if ($removeRst) {
+            // $allSquad = $this->pModelObj->getSquadPlayers();
+            // return $this->_twig->render('squadList.html.twig', ['squadPlayers' => $allSquad]);
+            header("Refresh:0 : url=index.php");
+        }
+    }
 }
