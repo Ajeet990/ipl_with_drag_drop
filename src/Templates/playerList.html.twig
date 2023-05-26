@@ -26,6 +26,13 @@
     View
   </button>
 
+  <div id="addedMessage" style="display:none">
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <strong>Congratulations</strong> New player inducted to the squad.
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  </div>
+
       <!-- Modal to add new player -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -35,7 +42,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action = "index.php" method="post" id="addNewPlayerForm">
+          <form method="post" id="addNewPlayerForm">
             <div class="mb-3">
               <label for="playerName" class="form-label">Player Name</label>
               <input type="text" name="playerName" class="form-control" id="playerName" aria-describedby="playerName">
@@ -48,7 +55,7 @@
               <label for="ptype" class="form-label">Player type</label>
               <input type="text" name="playerType" class="form-control" id="playerType" aria-describedby="ptype">
             </div>
-            <button  name="addNewPlayer"  class="btn btn-primary">Add Player</button>
+            <button  name="addNewPlayer" id="addNewPlayerButton"  class="btn btn-primary">Add Player</button>
           </form>
         </div>
         <div class="modal-footer">

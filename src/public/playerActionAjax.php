@@ -20,11 +20,14 @@ if (isset($_POST['removePlayerFromPlayingXi']) && $_POST['removePlayerFromPlayin
     $removeResult = $pControllerObj->removePlayerFromPlayingXi($playerId);
     echo $removeResult;
 }
+if (isset($_POST['addNewPlayer']) && $_POST['addNewPlayer'] == 1) {
+    $playerName = $_POST['playerName'];
+    $jerseyNo = $_POST['jerseyNo'];
+    $playerType = $_POST['playerType'];
+    $playerAddResult = $pControllerObj->addPlayer($playerName, $jerseyNo, $playerType);
+    echo $playerAddResult;
+}
 if (isset($_POST['removePlayerFromSquad']) && $_POST['removePlayerFromSquad'] == 1) {
     $playerId = (int)$_POST['playerId'];
     $removeResultSquad = $pControllerObj->removePlayerFromSquad($playerId);
-    echo "<pre>";
-    print_r($removeResultSquad);
-    die();
-    echo $removeResultSquad;
 }

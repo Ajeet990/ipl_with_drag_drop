@@ -50,6 +50,7 @@ $(document).ready(function() {
                 },
                 error:function (){}
             });
+            alert("Player removed from your Squad.")
             location.reload();
             location.reload();
         }
@@ -80,4 +81,25 @@ $(document).ready(function() {
             error:function (){}
         });
     }
+
+    $("#addNewPlayerButton").on('click', function(){
+        if ($("#addNewPlayerForm").valid()) {
+            // console.log("valid");
+            var playerName = $("#playerName").val();
+            var jerseyNo = $("#jerseyNo").val();
+            var playerType = $("#playerType").val();
+            jQuery.ajax({
+                url: "src/public/playerActionAjax.php",
+                data:{addNewPlayer:1, playerName:playerName, jerseyNo:jerseyNo, playerType:playerType},
+                type: "POST",
+                success:function(data){
+                    $("#addedMessage").show();
+                },
+                error:function (){}
+            });
+            alert("New player Inducted to the team.")
+            // $("#addNewPlayerForm").submit();
+            // location.reload();
+        }
+    })
 })

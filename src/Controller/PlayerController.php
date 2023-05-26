@@ -30,9 +30,12 @@ class PlayerController
     {
         $addResult = $this->pModelObj->addPlayer($playerName, $jerseyNo, $playerType);
         if ($addResult) {
-            $color = "success";
-            $message = "Player Added Sucessfully.";
-            echo $this->_twig->render("showMessage.html.twig", ['color' => $color, 'message' => $message]);
+            return true;
+            // $color = "success";
+            // $message = "Player Added Sucessfully.";
+            // echo $this->_twig->render("showMessage.html.twig", ['color' => $color, 'message' => $message]);
+        } else {
+            return false;
         }
     }
 
@@ -63,9 +66,9 @@ class PlayerController
     {
         $removeRst = $this->pModelObj->removePlayerFromSquad($playerId);
         if ($removeRst) {
-            // $allSquad = $this->pModelObj->getSquadPlayers();
-            // return $this->_twig->render('squadList.html.twig', ['squadPlayers' => $allSquad]);
-            header("Refresh:0 : url=index.php");
+            return true;
+        } else {
+            return false;
         }
     }
 }

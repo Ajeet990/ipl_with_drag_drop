@@ -11,9 +11,3 @@ $pModelObj = new playerModel($conn);
 $pControllerObj = new PlayerController($pModelObj);
 
 $pControllerObj->getLandingPage();
-if (isset($_POST['addNewPlayer'])) {
-    $playerName = $_POST['playerName'];
-    $jerseyNo = (int)$_POST['jerseyNo'];
-    $playerType = $_POST['playerType'];
-    $playerAddResult = $pControllerObj->addPlayer($playerName, $jerseyNo, $playerType);
-}
