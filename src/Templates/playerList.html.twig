@@ -19,7 +19,7 @@
   <button type="button" class="btn btn-primary my-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
     Add new player
   </button>
-  <button type="button" class="btn btn-primary my-1">
+  <button type="button" id="addPlayerScore" class="btn btn-primary my-1">
     Predict
   </button>
   <button type="button" class="btn btn-primary my-1">
@@ -107,24 +107,24 @@
               </tr>
           </thead>
         <tbody>
-        {% for player in playingXI %}
-            <tr id={{player.id}}>
-            <th scope="row">#</th>
-            <td>{{player.name}}</td>
-            <td><input type="number" value="{{player.score}}"/></td>
-            <td>
-              <div class="removePlayer" id={{player.id}} >
-                <a href="javascript:;"><i class="fa-sharp fa-solid fa-trash"></i></a>
-              </div>
-            </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-        </table>
-        {% else %}
-          <h4>No player in Playing XI till now</h4>
-          <h4>Drop here to add some players</h4>
-        {% endif %}
+          {% for player in playingXI %}
+              <tr id={{player.id}}>
+              <td scope="row">#</td>
+              <td>{{player.name}}</td>
+              <td><input type="number" id={{player.id}} class="playerScore" value="{{player.score}}"/></td>
+              <td>
+                <div class="removePlayer" id={{player.id}} >
+                  <a href="javascript:;"><i class="fa-sharp fa-solid fa-trash"></i></a>
+                </div>
+              </td>
+              </tr>
+          {% endfor %}
+          </tbody>
+          </table>
+          {% else %}
+            <h4>No player in Playing XI till now</h4>
+            <h4>Drop here to add some players</h4>
+          {% endif %}
       </div>
     </div>
   </div>
