@@ -31,3 +31,9 @@ if (isset($_POST['removePlayerFromSquad']) && $_POST['removePlayerFromSquad'] ==
     $playerId = (int)$_POST['playerId'];
     $removeResultSquad = $pControllerObj->removePlayerFromSquad($playerId);
 }
+
+if (isset($_POST['addPlayerScore']) && $_POST['addPlayerScore']== 1) {
+    $idsAndScores = isset($_POST['idAndScore']) ? $_POST['idAndScore'] : [];
+    $addScores = $pControllerObj->addScores($idsAndScores);
+    return $addScores;
+}

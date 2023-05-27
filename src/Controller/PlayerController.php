@@ -71,4 +71,13 @@ class PlayerController
             return false;
         }
     }
+
+    public function addScores(array $idsAndScores)
+    {
+        if (count($idsAndScores) < 1) {
+            return;
+        }
+        $addScoreResult = $this->pModelObj->addScore($idsAndScores);
+        return $addScoreResult;
+    }
 }

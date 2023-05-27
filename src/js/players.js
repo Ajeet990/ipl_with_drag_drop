@@ -80,11 +80,11 @@ $(document).ready(function() {
             },
             error:function (){}
         });
+            location.reload();
     }
 
     $("#addNewPlayerButton").on('click', function(){
         if ($("#addNewPlayerForm").valid()) {
-            // console.log("valid");
             var playerName = $("#playerName").val();
             var jerseyNo = $("#jerseyNo").val();
             var playerType = $("#playerType").val();
@@ -98,8 +98,27 @@ $(document).ready(function() {
                 error:function (){}
             });
             alert("New player Inducted to the team.")
-            // $("#addNewPlayerForm").submit();
-            // location.reload();
         }
+    })
+
+    $("#addPlayerScore").on("click", function() {
+        const items = document.querySelectorAll('.playerScore');
+        var playerIdAndScore = {}
+        for (let i = 0; i < items.length; i++) {
+            var playerScore = items[i].value;
+            var playerId = items[i].id;
+            playerIdAndScore[playerId] = playerScore;
+        } 
+        jQuery.ajax({
+            url: "src/public/playerActionAjax.php",
+            data:{addPlayerScore:1, idAndScore:playerIdAndScore},
+            type: "POST",
+            success:function(data){
+                // $("#addedMessage").show();
+            },
+            error:function (){}
+        });
+        alert("All player's score saved successfully.")
+        location.reload();
     })
 })

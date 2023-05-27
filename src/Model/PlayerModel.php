@@ -96,4 +96,14 @@ class PlayerModel
             return false;
         }
     }
+
+    public function addScore(array $idsAndScores)
+    {
+        foreach ($idsAndScores as $id => $score) {
+            $addScoreRst = $this->conn->prepare("UPDATE players set score = ? where id = ?");
+            $addScoreRst->bind_param("ii", $score, $id);
+            $addScoreRst->execute();
+        }
+        return true;
+    }
 }
