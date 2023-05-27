@@ -93,6 +93,9 @@
             <tr>
               <th scope="col">#</th>
               <th scope="col">Full Name</th>
+              <th scope="col">
+                <span class="tt" data-bs-placement="top" title="The players removed from this list will be still available in database."><i class="fa-sharp fa-solid fa-circle-info"></i></span>
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -103,7 +106,7 @@
               <td>{{player.name}}</td>
               <td>
                 <div class="deletePlayer" id={{player.id}} >
-                  <i class="fa-solid fa-user-minus"></i>
+                  <a href="javascript:;"><i class="fa-solid fa-user-minus"></i></a>
                 </td>
               </div>
             </tr>
@@ -123,6 +126,9 @@
               <th scope="col">#</th>
               <th scope="col">Full Name</th>
               <th scope="col">Score</th>
+              <th scope="col">
+                <span class="ttt" data-bs-placement="top" title="Players removed from this list will be in the squad list."><i class="fa-sharp fa-solid fa-circle-info"></i></span>
+              </th>
               </tr>
           </thead>
         <tbody>
@@ -148,7 +154,16 @@
     </div>
   </div>
 </div>
-
+<script>
+  const tooltip = document.querySelectorAll('.tt')
+  tooltip.forEach(t => {
+    new bootstrap.Tooltip(t)
+  })
+  const tooltip = document.querySelectorAll('.ttt')
+  tooltip.forEach(t => {
+    new bootstrap.Tooltip(t)
+  })
+</script>
 
     <script src="bootstrap/js/bootstrap.js"></script>
     <script src="src/js/jquery-3.7.js"></script>

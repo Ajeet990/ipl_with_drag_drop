@@ -76,6 +76,9 @@ $(document).ready(function() {
             data:queryString,
             type: "POST",
             success:function(data){
+                if (data == false) {
+                    alert("Team already full, please remove some player to add new player from squad");
+                }
                 $("#playingXI").html(data);
             },
             error:function (){}
@@ -134,4 +137,5 @@ $(document).ready(function() {
         });
         $('#viewChartModal').modal('show');
     })
+
 })

@@ -41,16 +41,21 @@ class PlayerController
 
     public function addPlayerInPlayingXI(int $playerId)
     {
-        $addRst = $this->pModelObj->addPlayerInPlayingXI($playerId);
-        if ($addRst) {
-            $playingXISquad = $this->pModelObj->getPlayingXIplayers();
-            if (count($playingXISquad) > 0) {
-                return $this->_twig->render("playingXiList.html.twig", ['playingXi' => $playingXISquad]);
+        $getNumberOfPlayingXIPlayers = $this->pModelObj->getPlayingXIplayers();
+        if (count($getNumberOfPlayingXIPlayers) < 11) {
+            $addRst = $this->pModelObj->addPlayerInPlayingXI($playerId);
+            if ($addRst) {
+                $playingXISquad = $this->pModelObj->getPlayingXIplayers();
+                if (count($playingXISquad) > 0) {
+                    return $this->_twig->render("playingXiList.html.twig", ['playingXi' => $playingXISquad]);
+                } else {
+                    return "No players are in Playing XI list.";
+                }
             } else {
-                return "No players are in Playing XI list.";
+                return "Something went wrong or player already added in playing XI list.";
             }
         } else {
-            return "Something went wrong or player already added in playing XI list.";
+            return false;
         }
     }
 
