@@ -80,4 +80,10 @@ class PlayerController
         $addScoreResult = $this->pModelObj->addScore($idsAndScores);
         return $addScoreResult;
     }
+
+    public function showChart()
+    {
+        $nameAndScore = $this->pModelObj->getNameAndScore(); 
+        return $this->_twig->render('viewChart.html.twig', ['nameAndScore' => $nameAndScore]);
+    }
 }

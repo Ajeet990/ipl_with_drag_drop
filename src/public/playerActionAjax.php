@@ -37,3 +37,8 @@ if (isset($_POST['addPlayerScore']) && $_POST['addPlayerScore']== 1) {
     $addScores = $pControllerObj->addScores($idsAndScores);
     return $addScores;
 }
+
+if (isset($_POST['showChart'])) {
+    $showChart = $pControllerObj->showChart();
+    echo $showChart;
+}

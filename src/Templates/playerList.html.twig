@@ -22,7 +22,7 @@
   <button type="button" id="addPlayerScore" class="btn btn-primary my-1">
     Predict
   </button>
-  <button type="button" class="btn btn-primary my-1">
+  <button type="button" class="btn btn-primary my-1" id="viewChart">
     View
   </button>
 
@@ -30,6 +30,25 @@
     <div class="alert alert-success alert-dismissible fade show" role="alert">
       <strong>Congratulations</strong> New player inducted to the squad.
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  </div>
+
+  {# View pie chart of player modal #}
+
+    <div class="modal fade modal-lg" id="viewChartModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Player's score Chart</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="chartBody">
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
     </div>
   </div>
 

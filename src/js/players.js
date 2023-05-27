@@ -121,4 +121,17 @@ $(document).ready(function() {
         alert("All player's score saved successfully.")
         location.reload();
     })
+
+    $("#viewChart").on('click', function(){
+        jQuery.ajax({
+            url: "src/public/playerActionAjax.php",
+            data:{showChart:1},
+            type: "POST",
+            success:function(data){
+                $("#chartBody").html(data);
+            },
+            error:function (){}
+        });
+        $('#viewChartModal').modal('show');
+    })
 })

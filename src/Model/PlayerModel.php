@@ -14,13 +14,6 @@ class PlayerModel
         $this->conn = $conn;
     }
 
-    // public function getAllPlayers()
-    // {
-    //     $allPlayersStmt = $this->conn->prepare("SELECT * from players");
-    //     $allPlayersStmt->execute();
-    //     $allPlayers = $allPlayersStmt->get_result()->fetch_all(MYSQLI_ASSOC);
-    //     return $allPlayers;
-    // }
     public function getSquadPlayers()
     {
         $status = PlayerModel::NOT_SELECTED_IN_PLAYING_XI;
@@ -105,5 +98,16 @@ class PlayerModel
             $addScoreRst->execute();
         }
         return true;
+    }
+
+    public function getNameAndScore() : array
+    {
+        $playingStatus = PlayerModel::SELECTED_IN_PLAYING_XI;
+        $deleteStatus = PlayerModel::PLAYER_NOT_DELETED;
+        $nameAndScoreStmt = $this->conn->prepare("SELECT name, score from players where isPlayingXi = ? and isDeleted = ?");
+        $nameAndScoreStmt->bind_param("ii", $playingStatus, $deleteStatus);
+        $nameAndScoreStmt->execute();
+        $nameAndScore = $nameAndScoreStmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $nameAndScore;
     }
 }
