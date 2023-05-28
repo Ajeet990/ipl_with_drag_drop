@@ -29,6 +29,27 @@
     </script>
   </head>
   <body>
-    <div id="piechart" style="width: 900px; height: 500px;"></div>
+  <div class="row">
+    <div id="piechart" class="col-5" style="width: 900px; height: 500px;"></div>
+    <div class="col-7">
+      <table class="table">
+      <thead>
+          <tr>
+              <th scope="col">Jersey Number</th>
+              <th scope="col">Full Name</th>
+              <th scope="col">Player Type</th>
+          </tr>
+      </thead>
+      <tbody>
+      {% for player in players %}
+        <tr>
+          <td>{{player.jersey_no}}</td>
+          <td>{{player.name}}</td>
+          <td>{{player.type}}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </div>
+  </div>
   </body>
 </html>

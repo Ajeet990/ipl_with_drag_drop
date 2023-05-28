@@ -88,7 +88,8 @@ class PlayerController
 
     public function showChart()
     {
-        $nameAndScore = $this->pModelObj->getNameAndScore(); 
-        return $this->_twig->render('viewChart.html.twig', ['nameAndScore' => $nameAndScore]);
+        $nameAndScore = $this->pModelObj->getNameAndScore();
+        $playingXIplayers = $this->pModelObj->getPlayingXIplayers();
+        return $this->_twig->render('viewChart.html.twig', ['nameAndScore' => $nameAndScore, 'players' => $playingXIplayers]);
     }
 }
